@@ -7,16 +7,16 @@
 local config = {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin", -- remote to use
-    channel = "stable", -- "stable" or "nightly"
-    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "main", -- branch name (NIGHTLY ONLY)
-    commit = nil, -- commit hash (NIGHTLY ONLY)
-    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
-    skip_prompts = false, -- skip prompts about breaking changes
-    show_changelog = true, -- show the changelog after performing an update
-    auto_reload = false, -- automatically reload and sync packer after a successful update
-    auto_quit = false, -- automatically quit the current session after a successful update
+    remote = "origin",                 -- remote to use
+    channel = "stable",                -- "stable" or "nightly"
+    version = "latest",                -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    branch = "main",                   -- branch name (NIGHTLY ONLY)
+    commit = nil,                      -- commit hash (NIGHTLY ONLY)
+    pin_plugins = nil,                 -- nil, true, false (nil will pin plugins on stable only)
+    skip_prompts = false,              -- skip prompts about breaking changes
+    show_changelog = true,             -- show the changelog after performing an update
+    auto_reload = false,               -- automatically reload and sync packer after a successful update
+    auto_quit = false,                 -- automatically quit the current session after a successful update
     -- remotes = { -- easily add new remotes to track
     --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
     --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
@@ -38,22 +38,22 @@ local config = {
   options = {
     opt = {
       -- set to true or false etc.
-      relativenumber = true, -- sets vim.opt.relativenumber
-      number = true, -- sets vim.opt.number
-      spell = false, -- sets vim.opt.spell
-      signcolumn = "auto", -- sets vim.opt.signcolumn to auto
-      wrap = false, -- sets vim.opt.wrap
+      relativenumber = true,                   -- sets vim.opt.relativenumber
+      number = true,                           -- sets vim.opt.number
+      spell = false,                           -- sets vim.opt.spell
+      signcolumn = "auto",                     -- sets vim.opt.signcolumn to auto
+      wrap = false,                            -- sets vim.opt.wrap
     },
     g = {
-      mapleader = " ", -- sets vim.g.mapleader
-      autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
-      cmp_enabled = true, -- enable completion at start
-      autopairs_enabled = true, -- enable autopairs at start
-      diagnostics_enabled = true, -- enable diagnostics at start
-      status_diagnostics_enabled = true, -- enable diagnostics in statusline
-      icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
-      ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-      heirline_bufferline = false, -- enable new heirline based bufferline (requires :PackerSync after changing)
+      mapleader = " ",                                     -- sets vim.g.mapleader
+      autoformat_enabled = true,                           -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+      cmp_enabled = true,                                  -- enable completion at start
+      autopairs_enabled = true,                            -- enable autopairs at start
+      diagnostics_enabled = true,                          -- enable diagnostics at start
+      status_diagnostics_enabled = true,                   -- enable diagnostics in statusline
+      icons_enabled = true,                                -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      ui_notifications_enabled = true,                     -- disable notifications when toggling UI elements
+      heirline_bufferline = false,                         -- enable new heirline based bufferline (requires :PackerSync after changing)
       -- copilot_no_tab_map = true,
       -- copilot_assume_mapped = true,
     },
@@ -89,7 +89,7 @@ local config = {
       fg = "#abb2bf",
       bg = "#1e222a",
     },
-    highlights = function(hl) -- or a function that returns a new table of colors to set
+    highlights = function(hl)             -- or a function that returns a new table of colors to set
       local C = require "default_theme.colors"
 
       hl.Normal = { fg = C.fg, bg = C.bg }
@@ -139,18 +139,18 @@ local config = {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true, -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
+        enabled = true,                             -- enable or disable format on save globally
+        allow_filetypes = {                         -- enable format on save for specified filetypes only
           -- "go",
         },
-        ignore_filetypes = { -- disable format on save for specified filetypes
+        ignore_filetypes = {                         -- disable format on save for specified filetypes
           -- "python",
         },
       },
-      disabled = { -- disable formatting capabilities for the listed language servers
+      disabled = {                   -- disable formatting capabilities for the listed language servers
         -- "sumneko_lua",
       },
-      timeout_ms = 1000, -- default format timeout
+      timeout_ms = 1000,                   -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
       --   return true
       -- end
@@ -252,9 +252,12 @@ local config = {
       {
         "github/copilot.vim",
       },
+      {
+        "vimwiki/vimwiki"
+      }
     },
     -- All other entries override the require("<key>").setup({...}) call for default plugins
-    ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
+    ["null-ls"] = function(config)             -- overrides `require("null-ls").setup(config)`
       -- config variable is the default configuration table for the setup function call
       -- local null_ls = require "null-ls"
 
@@ -266,20 +269,20 @@ local config = {
         -- null_ls.builtins.formatting.stylua,
         -- null_ls.builtins.formatting.prettier,
       }
-      return config -- return final config table
+      return config                   -- return final config table
     end,
-    treesitter = { -- overrides `require("treesitter").setup(...)`
+    treesitter = {                    -- overrides `require("treesitter").setup(...)`
       -- ensure_installed = { "lua" },
     },
     -- use mason-lspconfig to configure LSP installations
-    ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
+    ["mason-lspconfig"] = {             -- overrides `require("mason-lspconfig").setup(...)`
       -- ensure_installed = { "sumneko_lua" },
     },
     -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-    ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
+    ["mason-null-ls"] = {             -- overrides `require("mason-null-ls").setup(...)`
       -- ensure_installed = { "prettier", "stylua" },
     },
-    ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
+    ["mason-nvim-dap"] = {             -- overrides `require("mason-nvim-dap").setup(...)`
       -- ensure_installed = { "python" },
     },
     ["neo-tree"] = {
@@ -301,6 +304,9 @@ local config = {
     ["toggleterm"] = {
       direction = "horizontal",
     },
+    ["indent-o-matic"] = {
+      standard_widths = { 4 }
+    }
   },
   -- LuaSnip Options
   luasnip = {
@@ -386,6 +392,18 @@ local config = {
     -- }
 
     if vim.fn.filereadable ".vscode/launch.json" then require("dap.ext.vscode").load_launchjs() end
+
+    require('packer').startup(function()
+      use 'wbthomason/packer.nvim'
+      use { 'vimwiki/vimwiki', config = function()
+        vim.g.vimwiki_list = { { path = '~/', syntax = 'markdown', ext = '.md', } }
+        vim.g.vimwiki_ext2syntax = {
+          ['.md'] = 'markdown',
+          ['.markdown'] = 'markdown',
+          ['.mdown'] = 'markdown',
+        }
+      end }
+    end)
   end,
 }
 
