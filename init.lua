@@ -54,8 +54,6 @@ local config = {
             icons_enabled = true,              -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
             ui_notifications_enabled = true,   -- disable notifications when toggling UI elements
             heirline_bufferline = false,       -- enable new heirline based bufferline (requires :PackerSync after changing)
-            copilot_no_tab_map = true,
-            copilot_assume_mapped = true,
         },
     },
     -- If you need more control, you can use the function()...end notation
@@ -161,9 +159,6 @@ local config = {
                 -- ["<leader>lf"] = false -- disable formatting keymap
             },
             i = {
-                ["<C-J>"] = { 'copilot#Accept("<CR>")', silent = true, expr = true },
-                ["<C-H>"] = { "copilot#Next()", silent = true, expr = true },
-                ["<C-K>"] = { "copilot#Previous()", silent = true, expr = true },
             },
         },
         -- add to the global LSP on_attach function
@@ -250,8 +245,17 @@ local config = {
             --   end,
             -- },
             {
-                "github/copilot.vim",
+                "zbirenbaum/copilot.lua"
             },
+
+            {
+                "zbirenbaum/copilot-cmp",
+                after = { "copilot.lua" },
+                config = function()
+                    require("copilot_cmp").setup()
+                end
+            },
+
             {
                 "vimwiki/vimwiki"
             }
@@ -391,19 +395,44 @@ local config = {
         --   },
         -- }
 
+        require("copilot").setup({
+            panel = {
+                -- enabled = false,
+                auto_refresh = false,
+                keymap = {
+                    accept = "<CR>",
+                    jump_prev = "[[",
+                    jump_next = "]]",
+                    refresh = "gr",
+                    open = "<M-CR>",
+                },
+            },
+            suggestion = {
+                -- enabled = false,
+                auto_trigger = true,
+                keymap = {
+                    accept = "<M-l>",
+                    prev = "<M-[>",
+                    next = "<M-]>",
+                    dismiss = "<C-]>",
+                },
+            },
+        })
+
         if vim.fn.filereadable ".vscode/launch.json" then require("dap.ext.vscode").load_launchjs() end
 
-        require('packer').startup(function()
-            use 'wbthomason/packer.nvim'
-            use { 'vimwiki/vimwiki', config = function()
-                vim.g.vimwiki_list = { { path = '~/', syntax = 'markdown', ext = '.md', } }
-                vim.g.vimwiki_ext2syntax = {
-                    ['.md'] = 'markdown',
-                    ['.markdown'] = 'markdown',
-                    ['.mdown'] = 'markdown',
-                }
-            end }
-        end)
+
+        -- require('packer').startup(function()
+        --     use 'wbthomason/packer.nvim'
+        --     use { 'vimwiki/vimwiki', config = function()
+        --         vim.g.vimwiki_list = { { path = '~/', syntax = 'markdown', ext = '.md', } }
+        --         vim.g.vimwiki_ext2syntax = {
+        --             ['.md'] = 'markdown',
+        --             ['.markdown'] = 'markdown',
+        --             ['.mdown'] = 'markdown',
+        --         }
+        --     end }
+        -- end)
     end,
 }
 
